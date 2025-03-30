@@ -1,28 +1,41 @@
-'use client'
+"use client";
 import Image from "next/image";
 import * as React from "react";
 import Calendar from "@cloudscape-design/components/calendar";
-import { Badge, SpaceBetween } from "@cloudscape-design/components";
+import { Badge, Box } from "@cloudscape-design/components";
 import "./globals.css";
 
 export default function Home() {
-  const [value, setValue] = React.useState("");
+  const [date, setDate] = React.useState("Select a date");
+  const dateText = date === "Select a date" ? date : `Travel to ${date}`;
   return (
     <div className="grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 rounded font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <h1 className="text-4xl font-semibold">
-          Vandy Zhang.
-        </h1>
-        <SpaceBetween size={"s"} ></SpaceBetween>
-        <blockquote className="font-medium">
-          <p>I have a dream.</p>
-        </blockquote>
-        <p className="font-medium offset-4">— Martin Luther King Jr.</p>
-        <Badge color='green'>{value}</Badge>
-        <Calendar
-          onChange={({ detail }) => setValue(detail.value)}
-          value={value}
-        />
+        <h1 className="text-4xl font-semibold">Vandy Zhang.</h1>
+        <div className="flex items-center">
+          <Image
+            src={"/profile.jpg"}
+            alt={"profile photo"}
+            width={160}
+            height={160}
+          />
+          <Box margin={{ left: "l" }} padding={{ top: "xxxl", bottom: "xxxl" }}>
+            <blockquote className="text-xl font-medium">
+              <p>I have a dream.</p>
+            </blockquote>
+            <p className="text-lg font-medium mt-6 ml-4">
+              — Martin Luther King Jr.
+            </p>
+          </Box>
+        </div>
+
+        <Box>
+          <Badge color="green">{dateText}</Badge>
+          <Calendar
+            onChange={({ detail }) => setDate(detail.value)}
+            value={date}
+          />
+        </Box>
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
           <a

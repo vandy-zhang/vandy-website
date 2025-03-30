@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint && npx prettier . --write"
   },
   "dependencies": {
     "@cloudscape-design/components": "^3.0.932",
@@ -23,6 +23,7 @@
     "@types/react-dom": "*",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
+    "prettier": "3.5.3",
     "tailwindcss": "^4",
     "typescript": "*"
   }
