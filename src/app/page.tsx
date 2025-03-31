@@ -1,29 +1,28 @@
+'use client'
 import Image from "next/image";
+import * as React from "react";
+import Calendar from "@cloudscape-design/components/calendar";
+import { Badge, SpaceBetween } from "@cloudscape-design/components";
+import "./globals.css";
 
 export default function Home() {
+  const [value, setValue] = React.useState("");
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 rounded font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+        <h1 className="text-4xl font-semibold">
+          Vandy Zhang.
+        </h1>
+        <SpaceBetween size={"s"} ></SpaceBetween>
+        <blockquote className="font-medium">
+          <p>I have a dream.</p>
+        </blockquote>
+        <p className="font-medium offset-4">— Martin Luther King Jr.</p>
+        <Badge color='green'>{value}</Badge>
+        <Calendar
+          onChange={({ detail }) => setValue(detail.value)}
+          value={value}
         />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
           <a
@@ -51,7 +50,7 @@ export default function Home() {
           </a>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
+      <footer className="grid row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
           href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
