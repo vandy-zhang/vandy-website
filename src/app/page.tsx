@@ -1,16 +1,20 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
-import Calendar from "@cloudscape-design/components/calendar";
-import { Badge, Box } from "@cloudscape-design/components";
+import { Calendar } from "@cloudscape-design/components";
 import "./globals.css";
+import MusicCard from "./components/MusicCard";
+import { ZodiacCard } from "./components/ZodiacCard";
+import { STAR_SIGNS, ZODIAC_SIGNS } from "./utils/constants";
 
 export default function Home() {
   const date = new Date();
-  const [horoscopeDate, setHoroscopeDate] = React.useState(
-    date.toISOString().split("T")[0],
-  );
+  const todayDate = date.toISOString().split("T")[0];
+  const [horoscopeDate, setHoroscopeDate] = React.useState(todayDate);
+  const dateText =
+    horoscopeDate === todayDate
+      ? `Today is ${todayDate}`
+      : `Travel to ${horoscopeDate}`;
 
   return (
     <div className="min-h-screen flex flex-col font-[family-name:var(--font-geist-sans)]">
@@ -40,30 +44,46 @@ export default function Home() {
 
       {/* Main Content */}
       <main className="flex flex-col items-center sm:items-start gap-12 px-8 py-12 flex-grow">
-        <div className="flex items-center">
-          <Image
-            src={"/profile.jpg"}
-            alt={"profile photo"}
-            width={160}
-            height={160}
+        <MusicCard />
+        <div className="w-full flex flex-col items-center justify-center text-center">
+          <p className="text-lg font-medium mt-10 ml-4">
+            Hello 你好 안녕 こんにちは สวัสดี
+          </p>
+          <p className="text-lg font-medium mt-8 ml-4">
+            Welcome to My Daily Horoscope
+          </p>
+        </div>
+        <div className="max-w-3xl grid grid-cols-3 gap-4 mt-8 mx-auto">
+          <ZodiacCard starSign={STAR_SIGNS.SUN} zodiacSign={ZODIAC_SIGNS.LEO} />
+          <ZodiacCard
+            starSign={STAR_SIGNS.MOON}
+            zodiacSign={ZODIAC_SIGNS.GEMINI}
           />
-          <Box margin={{ left: "l" }} padding={{ top: "xxxl", bottom: "xxxl" }}>
-            <blockquote className="text-xl font-medium">
-              <p>I have a dream.</p>
-            </blockquote>
-            <p className="text-lg font-medium mt-6 ml-4">
-              — Martin Luther King Jr.
-            </p>
-          </Box>
+          <ZodiacCard
+            starSign={STAR_SIGNS.RISING}
+            zodiacSign={ZODIAC_SIGNS.VIRGO}
+          />
+          <ZodiacCard
+            starSign={STAR_SIGNS.MERCURY}
+            zodiacSign={ZODIAC_SIGNS.VIRGO}
+          />
+          <ZodiacCard
+            starSign={STAR_SIGNS.VENUS}
+            zodiacSign={ZODIAC_SIGNS.CANCER}
+          />
+          <ZodiacCard
+            starSign={STAR_SIGNS.MARS}
+            zodiacSign={ZODIAC_SIGNS.SAGITTARIUS}
+          />
         </div>
 
-        <Box>
-          <Badge color="green">{horoscopeDate}</Badge>
+        <div className="w-full flex flex-col">
+          <p className="text-lg font-medium mt-8 ml-4 mb-4">{dateText}</p>
           <Calendar
             onChange={({ detail }) => setHoroscopeDate(detail.value)}
             value={horoscopeDate}
           />
-        </Box>
+        </div>
       </main>
 
       {/* Footer (optional) */}
